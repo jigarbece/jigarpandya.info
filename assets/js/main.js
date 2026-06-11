@@ -1,3 +1,4 @@
+
 /* Jigar M. Pandya - Portfolio | jigarpandya.info | contact@jigarpandya.info */
 (function () {
   const nav = document.querySelector(".site-nav");
@@ -17,29 +18,29 @@
   if (visitorCount) {
     const total = visitorCount.querySelector("[data-visitor-total]");
     const storageKey = "jp_unique_visit_counted";
-    const namespace = "jigarpandya-info";
-    const counterKey = "unique-visitors";
+    const counterBase = "https://api.counterapi.dev/v1/jigarpandya-info/unique-visitors";
     let shouldCount = true;
 
     try {
-      shouldCount = localStorage.getItem(storageKey) !== "1";
+      shouldCount = sessionStorage.getItem(storageKey) !== "1";
     } catch (_) {
-      shouldCount = false;
+      shouldCount = true;
     }
 
     visitorCount.hidden = false;
     if (total && !total.textContent.trim()) total.textContent = "1+";
 
-    const action = shouldCount ? "hit" : "get";
-    fetch(`https://api.countapi.xyz/${action}/${namespace}/${counterKey}`)
+    const counterUrl = shouldCount ? `${counterBase}/up` : `${counterBase}/`;
+    fetch(counterUrl)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
-        if (!Number.isFinite(data.value)) return;
-        total.textContent = data.value.toLocaleString();
+        const count = Number(data.count ?? data.value);
+        if (!Number.isFinite(count)) return;
+        total.textContent = count.toLocaleString();
         visitorCount.hidden = false;
         if (shouldCount) {
           try {
-            localStorage.setItem(storageKey, "1");
+            sessionStorage.setItem(storageKey, "1");
           } catch (_) {}
         }
       })
