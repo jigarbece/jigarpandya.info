@@ -326,8 +326,6 @@
       learnings: browser.querySelector("[data-project-detail-learnings]")
     };
     let active = browser.dataset.activeProject || "snaprain";
-    let timer;
-    const keys = Object.keys(projectsPageData);
     const setProject = (key, userAction = false) => {
       const project = projectsPageData[key];
       if (!project || !panel) return;
@@ -353,23 +351,10 @@
       });
       if (window.gsap) gsap.fromTo(panel, { opacity: 0.78, y: 12 }, { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" });
     };
-    const start = () => {
-      window.clearInterval(timer);
-      timer = window.setInterval(() => {
-        const index = keys.indexOf(active);
-        setProject(keys[(index + 1) % keys.length]);
-      }, 4200);
-    };
-    const stop = () => window.clearInterval(timer);
     browser.querySelectorAll(".project-thumb").forEach((thumb) => {
-      thumb.addEventListener("click", () => { stop(); setProject(thumb.dataset.project, true); });
-      thumb.addEventListener("mouseenter", () => { stop(); setProject(thumb.dataset.project, true); });
-      thumb.addEventListener("focus", () => { stop(); setProject(thumb.dataset.project, true); });
+      thumb.addEventListener("click", () => setProject(thumb.dataset.project, true));
     });
-    browser.addEventListener("mouseleave", start);
-    browser.addEventListener("focusout", start);
     setProject(active);
-    start();
   });
 
   document.querySelectorAll("img[loading='lazy']").forEach((image) => {
