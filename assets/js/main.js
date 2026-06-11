@@ -440,7 +440,7 @@
     const details = switcher.querySelector("[data-project-details]");
     const live = switcher.querySelector("[data-project-live]");
 
-    function setProject(projectKey, userAction = false) {
+    function setProject(projectKey) {
       const project = projectData[projectKey];
       if (!project || !feature) return;
       switcher.dataset.activeProject = projectKey;
@@ -475,13 +475,10 @@
           gsap.fromTo(feature.querySelector(".showcase-device img"), { y: 18, rotate: 5, opacity: 0 }, { y: 0, rotate: 3, opacity: 1, duration: 0.55, ease: "power3.out" });
         }
       }, 180);
-      if (userAction && window.matchMedia("(max-width: 991px)").matches) {
-        window.setTimeout(() => feature.scrollIntoView({ behavior: "smooth", block: "start" }), 220);
-      }
     }
 
     switcher.querySelectorAll(".project-rail-item").forEach((button) => {
-      button.addEventListener("click", () => setProject(button.dataset.project, true));
+      button.addEventListener("click", () => setProject(button.dataset.project));
     });
   });
 
