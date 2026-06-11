@@ -59,17 +59,21 @@
               <a class="btn btn-primary-glow cta-animate" href="projects.html">See My Work <i class="fa-solid fa-arrow-right"></i></a>
               <a class="btn btn-ghost cta-animate" href="assets/Jigar-Pandya-CV.pdf" download>Download CV</a>
             </div>
+            <div class="hero-signal-strip">
+              <span>enterprise payroll</span>
+              <span>AI integration</span>
+              <span>.NET architecture</span>
+            </div>
             <div class="social-row d-flex justify-content-center justify-content-lg-start gap-3 mt-4">
               <a href="https://linkedin.com/in/jigar-pandya-90999218" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
               <a href="mailto:contact@jigarpandya.info" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-              <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             </div>
           </div>
           <div class="col-lg-5">
             <div class="portrait-stage" aria-label="Portrait of Jigar Pandya">
               <div class="portrait-orbit"></div>
               <div class="portrait-card">
-                <img src="assets/images/jigar-pandya.jpg" alt="Jigar M. Pandya portrait">
+                <img src="assets/images/jigar-pandya.jpg" alt="Jigar M. Pandya portrait" fetchpriority="high" decoding="async">
               </div>
               <div class="portrait-chip chip-top"><span>Tech Lead</span><strong>.NET</strong></div>
               <div class="portrait-chip chip-bottom"><span>Enterprise</span><strong>11+ yrs</strong></div>
@@ -143,9 +147,41 @@
           <h2>Building on the Side</h2>
           <p>Learning projects exploring AI, health tech & automation</p>
         </div>
-        <div class="row g-4">
-          <div class="col-lg-6"><article class="project-card featured glass-card" style="--project-accent:#ff4757"><div class="project-preview compact"><img src="assets/images/projects/vitalai.png" alt="VitalAI app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-status">In Development</span></div><h3>VitalAI 🩺</h3><h4>AI Blood Report Analyzer</h4><p>Upload a blood report -> get personalized diet & exercise plan powered by Claude AI.</p><div class="tech-pills"><span>React</span><span>Node.js</span><span>Anthropic API</span><span>Tailwind</span></div></article></div>
-          <div class="col-lg-6"><article class="project-card featured glass-card" style="--project-accent:#7c3aed"><div class="project-preview compact light-preview"><img src="assets/images/projects/astro.png" alt="AstroPortal app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-status">In Development</span></div><h3>AstroPortal 🔮</h3><h4>AI-Powered Astrology Platform</h4><p>Kundali reports + WhatsApp PDF delivery via Meta Cloud API.</p><div class="tech-pills"><span>ASP.NET Core</span><span>SQL Server</span><span>WhatsApp API</span></div></article></div>
+        <div class="project-showcase project-switcher" data-active-project="vitalai">
+          <div class="project-rail" role="tablist" aria-label="Learning projects">
+            <button class="project-rail-item active" type="button" role="tab" aria-selected="true" data-project="vitalai">
+              <img src="assets/images/projects/vitalai.png" alt="" loading="lazy" decoding="async">
+              <span><strong>VitalAI</strong><small>AI health reports</small></span>
+            </button>
+            <button class="project-rail-item" type="button" role="tab" aria-selected="false" data-project="astro">
+              <img src="assets/images/projects/astro.png" alt="" loading="lazy" decoding="async">
+              <span><strong>AstroPortal</strong><small>Kundali + WhatsApp</small></span>
+            </button>
+            <button class="project-rail-item" type="button" role="tab" aria-selected="false" data-project="snaprain">
+              <img src="assets/images/projects/snaprain.png" alt="" loading="lazy" decoding="async">
+              <span><strong>SnapRain</strong><small>Live photo sharing</small></span>
+            </button>
+            <button class="project-rail-item" type="button" role="tab" aria-selected="false" data-project="clipforge">
+              <img src="assets/images/projects/youtube.png" alt="" loading="lazy" decoding="async">
+              <span><strong>ClipForge AI</strong><small>YouTube automation</small></span>
+            </button>
+          </div>
+          <article class="project-showcase-card showcase-feature glass-card" style="--project-accent:#ff4757">
+            <div class="showcase-copy">
+              <div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-status" data-project-status>In Development</span></div>
+              <h3 data-project-title>VitalAI 🩺</h3>
+              <h4 data-project-tagline>AI Blood Report Analyzer</h4>
+              <p data-project-desc>Upload a blood report -> get personalized diet & exercise plan powered by Claude AI.</p>
+              <div class="tech-pills" data-project-tech><span>React</span><span>Node.js</span><span>Anthropic API</span><span>Tailwind</span></div>
+              <div class="showcase-actions">
+                <a class="btn btn-primary-glow cta-animate" data-project-details href="projects.html#vitalai">View Details <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn btn-ghost cta-animate" data-project-live href="https://vitalai.jigarpandya.info/" target="_blank" rel="noreferrer">Live App</a>
+              </div>
+            </div>
+            <div class="showcase-device">
+              <img data-project-image src="assets/images/projects/vitalai.png" alt="VitalAI app screenshot" loading="lazy" decoding="async">
+            </div>
+          </article>
         </div>
         <div class="text-center mt-4"><a class="btn btn-primary-glow cta-animate" href="projects.html">See All Projects <i class="fa-solid fa-arrow-right"></i></a></div>
       </div>
@@ -156,7 +192,28 @@
         <div class="row g-4 text-center">
           <div class="col-md-4"><strong>🏆 Hackathon Winner</strong><span>ML Resume Screener built in 1 day (2023)</span></div>
           <div class="col-md-4"><strong>🔬 84 Google Scholar Citations</strong><span>Face Recognition research paper</span></div>
-          <div class="col-md-4"><strong>🏏 #1 All-Rounder</strong><span>Cricheros Ahmedabad cricket rankings</span></div>
+          <div class="col-md-4"><strong>🏏 Competitive Mindset</strong><span>Cricket discipline, leadership, and consistency</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad cricket-section">
+      <div class="container">
+        <div class="cricket-card glass-card">
+          <div class="cricket-photo">
+            <img src="assets/images/jigar-cricket-trophies.jpg" alt="Jigar Pandya with cricket trophies" loading="lazy" decoding="async">
+          </div>
+          <div class="cricket-copy">
+            <span class="section-kicker">Beyond Code</span>
+            <h2>Engineer by Profession, Cricket All-Rounder by Passion</h2>
+            <p>Years on the field have shaped the same traits I bring to engineering: consistency, calm execution, leadership under pressure, and the habit of showing up for the team.</p>
+            <div class="cricket-stats">
+              <div><strong>36,000+</strong><span>Runs</span></div>
+              <div><strong>1,500+</strong><span>Wickets</span></div>
+              <div><strong>#1</strong><span>All-Rounder Spirit</span></div>
+            </div>
+            <a class="btn btn-primary-glow cta-animate" href="https://cricheroes.com/player-profile/36659/jigar-pandya/matches" target="_blank" rel="noreferrer">View Cricheroes Profile <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
         </div>
       </div>
     </section>

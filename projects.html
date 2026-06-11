@@ -20,25 +20,171 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .snaprain-card {
+      --project-accent: #00b4d8;
+      position: relative;
+      border-top-color: #00b4d8;
+      animation: snaprainBorderPulse 3s ease-in-out infinite;
+    }
+    .snaprain-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 90px rgba(0, 180, 216, 0.18);
+    }
+    .snaprain-card .snaprain-header {
+      grid-row: 1 / span 10;
+      margin: 0;
+      padding: 0;
+      border: 1px solid rgba(0, 180, 216, 0.25);
+      border-radius: 8px;
+      background: linear-gradient(135deg, #001a2e, #003554);
+      overflow: hidden;
+    }
+    .snaprain-card .snaprain-header .project-preview {
+      margin: 0;
+      min-height: 340px;
+      border-color: rgba(0, 180, 216, 0.22);
+      background: transparent;
+    }
+    .snaprain-card .badge-live {
+      color: #fff;
+      background: #22c55e;
+    }
+    .snaprain-card .snaprain-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .snaprain-card .snaprain-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      color: #021019;
+      background: #00b4d8;
+      font-weight: 800;
+      box-shadow: 0 0 26px rgba(0, 180, 216, 0.25);
+    }
+    .snaprain-card .snaprain-btn:hover {
+      color: #021019;
+      box-shadow: 0 0 38px rgba(0, 180, 216, 0.48);
+      transform: translateY(-2px);
+    }
+    .snaprain-card .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 rgba(34, 197, 94, 0.55);
+      animation: snaprainLivePulse 1.4s ease-in-out infinite;
+    }
+    .snaprain-card .snaprain-checks {
+      list-style: none;
+      padding-left: 0;
+    }
+    .snaprain-card .snaprain-checks li::before {
+      content: "✓";
+      color: #22c55e;
+      font-weight: 900;
+      margin-right: 0.55rem;
+    }
+    .snaprain-card .snaprain-credit {
+      margin: 1rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .project-live-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .project-live-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      color: #021019;
+      background: var(--project-accent, #00d4ff);
+      font-weight: 800;
+      box-shadow: 0 0 26px color-mix(in srgb, var(--project-accent, #00d4ff) 28%, transparent);
+    }
+    .project-live-btn:hover {
+      color: #021019;
+      transform: translateY(-2px);
+      box-shadow: 0 0 38px color-mix(in srgb, var(--project-accent, #00d4ff) 48%, transparent);
+    }
+    @keyframes snaprainBorderPulse {
+      50% {
+        border-color: rgba(0, 180, 216, 0.82);
+        box-shadow: 0 0 34px rgba(0, 180, 216, 0.18);
+      }
+    }
+    @keyframes snaprainLivePulse {
+      70% { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    @media (max-width: 991px) {
+      .snaprain-card .snaprain-header {
+        grid-row: auto;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
 </head>
 <body data-page="projects">
   <nav class="navbar navbar-expand-lg fixed-top site-nav"><div class="container"><a class="navbar-brand logo-mark" href="index.html">&lt;JP/&gt;</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="mainNav"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2"><li class="nav-item"><a class="nav-link" href="index.html">Home</a></li><li class="nav-item"><a class="nav-link" href="experience.html">Experience</a></li><li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li><li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li><li class="nav-item ms-lg-2"><a class="btn btn-hire" href="contact.html">Contact Me</a></li></ul></div></div></nav>
   <main>
-    <section class="page-hero"><div class="container"><span class="section-kicker">Personal Lab</span><h1>Personal Projects</h1><p>Side ventures built to learn AI, health tech, automation & mobile development. All marked as learning projects - not client work.</p></div></section>
-    <section class="section-pad">
+    <section class="page-hero"><canvas id="particleCanvas" aria-hidden="true"></canvas><div class="container"><span class="section-kicker">Personal Lab</span><h1>Personal Projects</h1><p>Side ventures built to learn AI, health tech, automation & mobile development. All marked as learning projects - not client work.</p></div></section>
+    <section class="section-pad project-lab-section">
       <div class="container">
-        <div class="disclaimer"><i class="fa-solid fa-triangle-exclamation"></i> These are personal learning projects built to explore new technologies. They are not client deliverables.</div>
-        <div class="row g-4 mt-2">
-          <div class="col-lg-6"><article class="project-card glass-card" style="--project-accent:#ff4757"><div class="project-preview phone-preview"><img src="assets/images/projects/vitalai.png" alt="VitalAI app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-status">In Development</span></div><h2>VitalAI 🩺</h2><h3>AI-Powered Blood Report Analyzer</h3><p>Upload a blood test report (PDF or image) and receive AI-generated personalized diet plans, exercise recommendations, and biomarker analysis.</p><ul><li>Blood report upload (PDF / Image)</li><li>AI biomarker analysis via Claude API</li><li>Personalized diet & exercise plan</li><li>Health score with color indicators</li><li>Blood marker table for Normal / High / Low</li></ul><div class="tech-pills"><span>React</span><span>Vite</span><span>Tailwind CSS</span><span>Node.js</span><span>Express</span><span>Anthropic Claude API</span><span>pdf-parse</span><span>Tesseract.js</span></div><strong>What I Learned</strong><p>Anthropic API integration, file parsing pipelines, stateless backend design, multi-step UX flows.</p></article></div>
-          <div class="col-lg-6"><article class="project-card glass-card" style="--project-accent:#7c3aed"><div class="project-preview phone-preview light-preview"><img src="assets/images/projects/astro.png" alt="AstroPortal app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-status">In Development</span></div><h2>AstroPortal 🔮</h2><h3>AI-Powered Astrology & Kundali Platform</h3><p>Full-featured astrology portal serving personalized Kundali reports, with WhatsApp Business API delivery for PDF reports.</p><ul><li>Kundali report generation</li><li>WhatsApp PDF delivery via Meta Cloud API</li><li>Client management with stored mobile numbers</li><li>Custom SVG planet assets</li><li>AI-generated interpretations</li></ul><div class="tech-pills"><span>ASP.NET Core</span><span>C#</span><span>MS SQL Server</span><span>Meta WhatsApp Cloud API</span><span>JavaScript</span><span>Custom SVG</span></div><strong>What I Learned</strong><p>WhatsApp Business API, Meta Cloud API document messages, template approval flow, SVG asset design.</p></article></div>
-          <div class="col-lg-6"><article class="project-card glass-card" style="--project-accent:#ff6348"><div class="project-preview phone-preview light-preview"><img src="assets/images/projects/snaprain.png" alt="SnapRain app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-muted">Concept & Planning</span></div><h2>SnapRain 📸</h2><h3>AI Food Calorie Scanner</h3><p>Point your phone camera at any food and get calorie estimates and nutritional breakdown powered by Vision AI.</p><ul><li>Photo-based food recognition</li><li>Instant calorie & nutrition estimate</li><li>Vision AI API integration</li><li>Mobile-first PWA / Expo app</li></ul><div class="tech-pills"><span>.NET Web API</span><span>Vision AI API</span><span>React Native</span><span>Expo</span><span>SQL Server</span></div><strong>What I Learned</strong><p>Vision AI APIs, mobile development with Expo, React Native basics, PWA architecture.</p></article></div>
-          <div class="col-lg-6"><article class="project-card glass-card" style="--project-accent:#ff0000"><div class="project-preview phone-preview"><img src="assets/images/projects/youtube.png" alt="YouTube automation app screenshot"></div><div class="badge-row"><span class="badge badge-learning">Learning Project</span><span class="badge badge-green">Built & Testing</span></div><h2>YouTube Automation Pipeline 🎬</h2><h3>Fully Automated Faceless YouTube Channel</h3><p>End-to-end pipeline that researches trends, generates scripts, creates voiceovers, assembles videos, and uploads to YouTube.</p><ul><li>Trending topic research via pytrends</li><li>AI script generation with local Mistral LLM</li><li>Text-to-speech voiceover</li><li>Auto video assembly with stock footage</li><li>Scheduled YouTube upload</li></ul><div class="tech-pills"><span>Python</span><span>Ollama</span><span>Mistral LLM</span><span>MoviePy</span><span>FFmpeg</span><span>edge-tts</span><span>pytrends</span><span>Pexels API</span><span>YouTube Data API v3</span></div><strong>What I Learned</strong><p>Local LLM orchestration, video pipeline automation, Python scripting, API chaining.</p></article></div>
+        <div class="project-lab-top glass-card">
+          <div class="lab-console-copy">
+            <div class="lab-console-bar"><span></span><span></span><span></span><code>~/jigar/build-lab</code></div>
+            <span class="section-kicker">Build Lab</span>
+            <h2><span>Experiments</span> that became <span>products</span></h2>
+            <p>Personal learning projects built to explore AI, automation, PWAs, APIs, and mobile-first workflows.</p>
+            <div class="lab-command"><code>npm run curiosity -- --ship</code></div>
+          </div>
+          <div class="project-lab-stats">
+            <span><strong>4</strong> learning builds</span>
+            <span><strong>3</strong> live apps</span>
+            <span><strong>AI</strong> + automation</span>
+          </div>
+        </div>
+        <div class="disclaimer mt-3"><i class="fa-solid fa-triangle-exclamation"></i> These are personal learning projects built to explore new technologies. They are not client deliverables.</div>
+        <div class="project-browser mt-4" data-active-project="snaprain">
+          <div class="project-filmstrip" aria-label="Project selector">
+            <button class="project-thumb active" type="button" data-project="snaprain" style="--project-accent:#00b4d8"><img src="assets/images/projects/snaprain.png" alt="SnapRain screenshot" loading="lazy" decoding="async"><span><strong>SnapRain</strong><small>Live & Deployed</small></span></button>
+            <button class="project-thumb" type="button" data-project="vitalai" style="--project-accent:#ff4757"><img src="assets/images/projects/vitalai.png" alt="VitalAI screenshot" loading="lazy" decoding="async"><span><strong>VitalAI</strong><small>AI Health</small></span></button>
+            <button class="project-thumb" type="button" data-project="astro" style="--project-accent:#7c3aed"><img src="assets/images/projects/astro.png" alt="AstroPortal screenshot" loading="lazy" decoding="async"><span><strong>AstroPortal</strong><small>Astrology Platform</small></span></button>
+            <button class="project-thumb" type="button" data-project="youtube" style="--project-accent:#ff0000"><img src="assets/images/projects/youtube.png" alt="ClipForge AI screenshot" loading="lazy" decoding="async"><span><strong>ClipForge AI</strong><small>Automation</small></span></button>
+          </div>
+          <article class="project-detail-panel glass-card" style="--project-accent:#00b4d8">
+            <div class="project-detail-visual"><img data-project-detail-image src="assets/images/projects/snaprain.png" alt="SnapRain screenshot" loading="lazy" decoding="async"></div>
+            <div class="project-detail-copy">
+              <div class="badge-row" data-project-detail-badges><span class="badge badge-learning">Learning Project</span><span class="badge badge-green">Live & Deployed</span></div>
+              <h2 data-project-detail-title>SnapRain 🌧️</h2>
+              <h3 data-project-detail-tagline>Signup-Free Real-Time Photo Sharing for Any Gathering</h3>
+              <p data-project-detail-description>A PWA that lets anyone at an event share and view photos in real-time using just a 6-character event code.</p>
+              <div class="project-detail-actions"><a class="project-live-btn" data-project-detail-live href="https://snaprain.jigarpandya.info" target="_blank" rel="noreferrer">🌐 Live App</a></div>
+              <strong>Key Features</strong>
+              <ul class="project-detail-list" data-project-detail-features></ul>
+              <strong>Tech Stack</strong>
+              <div class="tech-pills" data-project-detail-tech></div>
+              <strong>What I Built / Learned</strong>
+              <ul class="project-detail-list" data-project-detail-learnings></ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   </main>
   <footer class="site-footer"><div class="container text-center"><a class="logo-mark" href="index.html">&lt;JP/&gt;</a><p>Crafting enterprise software since 2010</p><div class="footer-links"><a href="index.html">Home</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></div><a href="mailto:contact@jigarpandya.info">contact@jigarpandya.info</a><small>© 2026 Jigar M. Pandya · jigarpandya.info · Built with passion in Ahmedabad 🇮🇳</small></div></footer>
   <button class="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><script src="assets/js/main.js"></script>
 </body>
 </html>
