@@ -13,6 +13,41 @@
 
   backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+  const visitorCount = document.querySelector("[data-visitor-count]");
+  if (visitorCount) {
+    const total = visitorCount.querySelector("[data-visitor-total]");
+    const storageKey = "jp_unique_visit_counted";
+    const namespace = "jigarpandya-info";
+    const counterKey = "unique-visitors";
+    let shouldCount = true;
+
+    try {
+      shouldCount = localStorage.getItem(storageKey) !== "1";
+    } catch (_) {
+      shouldCount = false;
+    }
+
+    visitorCount.hidden = false;
+    if (total && !total.textContent.trim()) total.textContent = "1+";
+
+    const action = shouldCount ? "hit" : "get";
+    fetch(`https://api.countapi.xyz/${action}/${namespace}/${counterKey}`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        if (!Number.isFinite(data.value)) return;
+        total.textContent = data.value.toLocaleString();
+        visitorCount.hidden = false;
+        if (shouldCount) {
+          try {
+            localStorage.setItem(storageKey, "1");
+          } catch (_) {}
+        }
+      })
+      .catch(() => {
+        visitorCount.hidden = false;
+      });
+  }
+
   const typewriter = document.querySelector(".typewriter");
   if (typewriter) {
     const phrases = typewriter.dataset.phrases.split("|");
@@ -405,7 +440,7 @@
     const details = switcher.querySelector("[data-project-details]");
     const live = switcher.querySelector("[data-project-live]");
 
-    function setProject(projectKey) {
+    function setProject(projectKey, userAction = false) {
       const project = projectData[projectKey];
       if (!project || !feature) return;
       switcher.dataset.activeProject = projectKey;
@@ -440,10 +475,13 @@
           gsap.fromTo(feature.querySelector(".showcase-device img"), { y: 18, rotate: 5, opacity: 0 }, { y: 0, rotate: 3, opacity: 1, duration: 0.55, ease: "power3.out" });
         }
       }, 180);
+      if (userAction && window.matchMedia("(max-width: 991px)").matches) {
+        window.setTimeout(() => feature.scrollIntoView({ behavior: "smooth", block: "start" }), 220);
+      }
     }
 
     switcher.querySelectorAll(".project-rail-item").forEach((button) => {
-      button.addEventListener("click", () => setProject(button.dataset.project));
+      button.addEventListener("click", () => setProject(button.dataset.project, true));
     });
   });
 

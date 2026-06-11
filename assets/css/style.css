@@ -764,6 +764,7 @@ p { color: var(--text-muted); line-height: 1.7; }
   align-items: center;
   min-height: 560px;
   padding: clamp(1.4rem, 3vw, 2rem);
+  scroll-margin-top: 6rem;
 }
 .showcase-feature.is-changing .showcase-copy,
 .showcase-feature.is-changing .showcase-device {
@@ -1664,6 +1665,17 @@ label { color: var(--text-primary); font-weight: 700; margin-bottom: 0.45rem; }
   justify-content: center;
   gap: 1rem;
   margin: 1rem 0;
+}
+.visitor-count {
+  display: block;
+  margin-top: 0.65rem;
+  color: color-mix(in srgb, var(--text-muted) 82%, transparent);
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+}
+.visitor-count strong {
+  color: var(--text-muted);
+  font-weight: 700;
 }
 .site-footer small { display: block; margin-top: 1rem; color: var(--text-muted); }
 .back-to-top {
