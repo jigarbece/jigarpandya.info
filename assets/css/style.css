@@ -646,6 +646,7 @@ p { color: var(--text-muted); line-height: 1.7; }
 .project-detail-panel {
   display: grid;
   grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+  align-items: start;
   gap: clamp(0.9rem, 2.2vw, 1.35rem);
   padding: clamp(1rem, 2.2vw, 1.35rem);
   border-top: 3px solid var(--project-accent, var(--accent-blue));
@@ -655,7 +656,7 @@ p { color: var(--text-muted); line-height: 1.7; }
   position: sticky;
   top: 5.2rem;
   display: grid;
-  min-height: 470px;
+  padding: clamp(0.9rem, 1.8vw, 1.4rem);
   place-items: center;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -665,8 +666,9 @@ p { color: var(--text-muted); line-height: 1.7; }
   overflow: hidden;
 }
 .project-detail-visual img {
-  width: min(82%, 310px);
-  max-height: 450px;
+  width: auto;
+  max-width: 100%;
+  max-height: 520px;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
@@ -1825,7 +1827,6 @@ label { color: var(--text-primary); font-weight: 700; margin-bottom: 0.45rem; }
   .project-detail-visual {
     position: relative;
     top: auto;
-    min-height: 310px;
   }
   .showcase-feature {
     grid-row: auto;
@@ -1881,11 +1882,8 @@ label { color: var(--text-primary); font-weight: 700; margin-bottom: 0.45rem; }
     width: 64px;
     height: 64px;
   }
-  .project-detail-visual {
-    min-height: 255px;
-  }
   .project-detail-visual img {
-    max-height: 245px;
+    max-height: 420px;
   }
   .cricket-stats {
     grid-template-columns: 1fr;

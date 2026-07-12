@@ -259,6 +259,19 @@
   });
 
   const projectsPageData = {
+    tejsikho: {
+      accent: "#f97316",
+      image: "assets/images/projects/tejsikho.png",
+      alt: "Tej Sikho screenshot",
+      badges: ["Learning Project", "Live & Deployed"],
+      title: "Tej Sikho तेज़ सीखो",
+      tagline: "Gamified Hindi Handwriting App for Kids",
+      description: "A forgiving-by-design PWA that sends kids back to pen and paper: show a Hindi letter, the child writes it by hand and scans it with the camera, and a lenient OCR pipeline rewards effort with coins, XP, and collectible cards. It never says \"wrong\" — only \"so close, try again!\"",
+      live: "https://learn.jigarpandya.info/",
+      features: ["Write-on-paper → scan → earn real-world learning loop", "Forgiving OCR that weights base characters above matras", "Full gamification: XP, levels, daily streaks & challenges, badges", "Reward economy: 100 collectible cards, treasure shop, grow-a-garden, leaderboard", "Live global \"champions\" visitor counter", "Immersive 3D landing & dashboard with floating letters and coins", "Data-driven, language-agnostic content (Hindi, Gujarati, English)", "Offline-capable PWA with network-first service worker"],
+      tech: ["React 18", "Vite", "Tailwind CSS", "Three.js", "Framer Motion", "Zustand", "Firebase Auth", "Cloud Firestore", "Google Cloud Vision", "Tesseract.js", "PWA", "Vitest"],
+      learnings: ["Confidence-aware, forgiving Devanagari scoring", "OCR pipeline with graceful Vision → Tesseract fallback", "Data-driven multi-language content architecture", "Firebase auth, atomic Firestore counters & security rules", "3D UI with Three.js and Framer Motion", "PWA service workers and offline app shell"]
+    },
     snaprain: {
       accent: "#00b4d8",
       image: "assets/images/projects/snaprain.png",
@@ -365,6 +378,18 @@
   });
 
   const projectData = {
+    tejsikho: {
+      accent: "#f97316",
+      status: "Live & Deployed",
+      title: "Tej Sikho तेज़ सीखो",
+      tagline: "Gamified Hindi Handwriting App for Kids",
+      desc: "Show a Hindi letter, the child writes it on paper and scans it — a forgiving OCR pipeline rewards effort with coins, XP & collectible cards. Never \"wrong,\" only \"try again!\"",
+      image: "assets/images/projects/tejsikho.png",
+      alt: "Tej Sikho app screenshot",
+      tech: ["React", "Three.js", "Firebase", "Cloud Vision"],
+      details: "projects.html#tejsikho",
+      live: "https://learn.jigarpandya.info/"
+    },
     vitalai: {
       accent: "#ff4757",
       status: "In Development",
